@@ -1,0 +1,45 @@
+const mongoose = require("mongoose")
+
+const postSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    minLength: 10,
+    maxLength: 100,
+    required: true
+  },
+  content: {
+    type: String,
+    minLength: 10,
+    maxLength: 1500,
+    required: true
+  },
+  tags: {
+    type: [String],
+    minLength: 3,
+    maxLength: 10,
+    required: true
+  },
+  ulrCoverImage: {
+    type: String
+  },
+  author: {
+    type: String,
+    minLength: 5,
+    maxLength: 50,
+    required: true
+  },
+  authorAvatar: {
+    type: String,
+    required: true
+  },
+  createdDate: {
+    type: Date,
+    default: new Date()
+  },
+  minToRead: {
+    type: Number,
+    maximum: 9999
+  }
+})
+
+module.exports = mongoose.model("posts", postSchema)
