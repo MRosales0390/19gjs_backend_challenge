@@ -1,11 +1,8 @@
-const { response } = require("express")
 const express = require("express")
 const auth = require("../middlewares/auth.middleware")
 const postMethods = require("../useCases/post.usecase")
 
 const router = express.Router()
-
-
 
 //  GET
 
@@ -49,8 +46,6 @@ router.get("/post/:id", async (request, response) => {
   }
 })
 
-
-
 router.use(auth)
 
 router.patch("/:id", auth, async (request, response) => {
@@ -73,7 +68,7 @@ router.patch("/:id", auth, async (request, response) => {
   }
 })
 
-router.delete("/:id", auth, async (request, response) => {
+router.delete("/post/:id", auth, async (request, response) => {
   try {
     const { id } = request.params
     const post = await postMethods.remove(id)
