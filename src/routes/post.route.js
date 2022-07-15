@@ -1,0 +1,49 @@
+const express = require("express")
+const auth = require("../middlewares/auth.middleware")
+const postMethods = require("../useCases/post.usecase")
+
+const router = express.Router()
+
+router.use(auth)
+
+router.patch("/post/:id", auth, async (request, response) => {
+  try {
+    const { id } = request.params
+    const post = await postMethods.update(id, request.body)
+
+    response.json({
+      success: true,
+      data: {
+        post
+      }
+    })
+  } catch (error) {
+    response.status(400)
+    response.json({
+      success: false,
+      message: error.message
+    })
+  }
+})
+
+router.delete("/post/:id", auth, async (request, response) => {
+  try {
+    const { id } = request.params
+    const post = await postMethods.remove(id)
+
+    response.json({
+      success: true,
+      data: {
+        post
+      }
+    })
+  } catch (error) {
+    response.status(400)
+    response.json({
+      success: false,
+      message: error.message
+    })
+  }
+})
+
+module.exports = router
