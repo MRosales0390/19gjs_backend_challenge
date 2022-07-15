@@ -6,26 +6,25 @@ const router = express.Router()
 
 router.post("/createPost", async (request, response) => {
   try {
-    const createdPost = await ( postMethods.createPost (request.body) )
+    const createdPost = await postMethods.createPost(request.body)
     response.json({
       success: true,
       data: { createdPost }
     })
-  }catch(error) {
+  } catch (error) {
     response.status(error.status || 500)
     response.json({
       success: false,
       message: error.message
     })
-   } 
+  }
 })
 
 //  GET
-
-router.get("/", async (request, response)=> {
+router.get("/", async (request, response) => {
   console.log("entramos aqui")
   try {
-    const getPosts = await postMethods.getAll();
+    const getPosts = await postMethods.getAll()
     response.json({
       success: true,
       data: {
@@ -33,11 +32,11 @@ router.get("/", async (request, response)=> {
       }
     })
   } catch (error) {
-  response.status(error.status || 500),
-  response.json({
-    success: false,
-    message: error.message
-  })    
+    response.status(error.status || 500),
+      response.json({
+        success: false,
+        message: error.message
+      })
   }
 })
 
@@ -45,7 +44,7 @@ router.get("/", async (request, response)=> {
 router.get("/post/:id", async (request, response) => {
   const { id } = request.params
 
-  try{
+  try {
     const getPost = await postMethods.getById(id)
     response.json({
       success: true,
@@ -53,19 +52,18 @@ router.get("/post/:id", async (request, response) => {
         getPost
       }
     })
-  } catch(error) {
-  response.status(error.status || 500)
+  } catch (error) {
+    response.status(error.status || 500)
     response.json({
       success: false,
       message: error.message
     })
-   } 
+  }
 })
 
 router.use(auth)
 
-
-router.patch("/:id", auth, async (request, response) => {
+router.patch("/post/:id", auth, async (request, response) => {
   try {
     const { id } = request.params
     const post = await postMethods.update(id, request.body)
