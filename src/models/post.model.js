@@ -19,7 +19,7 @@ const postSchema = new mongoose.Schema({
     maxLength: 10,
     required: true
   },
-  ulrCoverImage: {
+  urlCoverImage: {
     type: String
   },
   author: {
