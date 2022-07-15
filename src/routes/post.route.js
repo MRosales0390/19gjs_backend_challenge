@@ -5,6 +5,7 @@ const postMethods = require("../useCases/post.usecase")
 const router = express.Router()
 
 router.post("/createPost", async (request, response) => {
+  //console.log(request.body)
   try {
     const createdPost = await postMethods.createPost(request.body)
     response.json({
@@ -22,7 +23,7 @@ router.post("/createPost", async (request, response) => {
 
 //  GET
 router.get("/", async (request, response) => {
-  console.log("entramos aqui")
+  //console.log("entramos aqui")
   try {
     const getPosts = await postMethods.getAll()
     response.json({
