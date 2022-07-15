@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.use(auth)
 
-router.patch("/:id", auth, async (request, response) => {
+router.patch("/post/:id", auth, async (request, response) => {
   try {
     const { id } = request.params
     const post = await postMethods.update(id, request.body)
@@ -26,7 +26,7 @@ router.patch("/:id", auth, async (request, response) => {
   }
 })
 
-router.delete("/:id", auth, async (request, response) => {
+router.delete("/post/:id", auth, async (request, response) => {
   try {
     const { id } = request.params
     const post = await postMethods.remove(id)
